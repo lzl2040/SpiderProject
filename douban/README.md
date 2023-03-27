@@ -9,16 +9,16 @@
 
 ## 运行结果
 
-[result](https://github.com/lzl2040/SpiderProject/raw/master/douban/static/3.png)
+![result](./static/3.png)
 
 ## 可能出现的问题
 
 如果运行中出现如下错误：
 
-[error](https://github.com/lzl2040/SpiderProject/raw/master/douban/static/2.png)
+![error](./static/2.png)
 
 这是Pycharm中的编码设置问题，在File->Setting中找到如下界面:
 
-[solve](https://github.com/lzl2040/SpiderProject/raw/master/douban/static/1.png)
+![solve](./static/1.png)
 
 然后将编码改为UTF-8即可。

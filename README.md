@@ -8,4 +8,4 @@
 
 ## 公众号
 欢迎关注公众号，获取更多学习爬虫和人工智能的学习资料。
-[code](./resources/code.jpg)
+![code](./resources/code.jpg)

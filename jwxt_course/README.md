@@ -10,14 +10,14 @@
 (2)在该文件夹下打开命令行,流程如下:
 - 找到地址栏,如下图所示:
 
-[img](static/s1.png)
+![img](static/s1.png)
 - 将地址栏清空,然后输入cmd,如下图所示:
 
-[img2](static/s2.png)
+![img2](static/s2.png)
 
 - 命令行界面如下:
 
-[img3](static/s3.png)
+![img3](static/s3.png)
 
 (3)输入如下命令,安装好需要的包
 ```
@@ -35,7 +35,7 @@ python jwxt.py -h
 
 (5)抢课成功会出现:
 
-[img4](static/rs.png)
+![img4](static/rs.png)
 
 ## 开发日志
 ### 2023-02-13

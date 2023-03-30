@@ -5,8 +5,8 @@ from bs4 import BeautifulSoup
 # 豆瓣登录
 def login():
     # 麻烦的事情:需要滑块验证码
-    phone = "18166158481"
-    pwd = "20401314521lzl"
+    phone = "34334"
+    pwd = "234"
     # phone = input("请输入电话号码")
     # pwd = input("请输入密码")
     headers = {

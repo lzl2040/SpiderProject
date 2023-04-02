@@ -32,7 +32,9 @@ ticket的获取方法:
 运行环境:
 - python
 
-在该项目文件夹下运行命令:
+首先填好自己的ticket
+
+然后在该项目文件夹下运行命令:
 ```
 python submit.py
 ```

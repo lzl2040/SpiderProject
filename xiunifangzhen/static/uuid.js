@@ -212,6 +212,8 @@ function getUUID() {
         return uuid + "&" + taskid;
 }
 
+XM3zQRgg
+
 function getCASLOGC(key) {
     // 从cookie里面获得CASLOGC这个键值的内容
     var r = unescape(getCookie("CASLOGC"));

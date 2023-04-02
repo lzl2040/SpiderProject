@@ -4,7 +4,7 @@ from loguru import logger
 import random
 
 class QiaSumbit():
-    def __init__(self):
+    def __init__(self,uuid,ticket):
         self.tag = "QiaTongXue"
         # 提交数据的header
         self.submitHeaders = {
@@ -25,6 +25,8 @@ class QiaSumbit():
             "Accept-Encoding":"gzip, deflate, br",
             "Accept-Language":"zh-CN,zh;q=0.9 "
         }
+        self.uuid = uuid
+        self.ticket = ticket
 
     def readFromJson(self):
         with open("./static/data.json","r",encoding='utf-8') as f:
@@ -38,29 +40,38 @@ class QiaSumbit():
         self.data["score"] = score
         # 总共实验的时间
         all_time_use = 0
-        # 记录结束的
+        # 记录的其实是最终得到的开始的时间
         k = endTime
         # 总共花的步数
         step_len = len(self.data["steps"])
-        # 遍历所有的步数
+        # 遍历所有的步数,从结束时间往前推,计算开始时间和每步的时间
         for i in range(step_len):
             step = self.data["steps"][step_len - 1 - i]
-            t = random.randint(4, 50)  # 未在17个模块中花费的时间
+            # 从10-50这随机取一个整数，主要是偏移一些时间
+            t = random.randint(10, 50)
             all_time_use += t
             k = k - t * 1000
             step["endTime"] = k
-
-            t = step["expectTime"] + random.randint(4, 50)
+            # 得到的是当前步骤花费的时间
+            t = step["expectTime"] + random.randint(10, 50)
+            # 增加总共花费的时间
             all_time_use += t
+            # 记录使用的时间
             step["timeUsed"] = t
+            # 记录当前步骤的分数
             step["score"] = step["maxScore"]
+            # 往前推时间
             k = k - t * 1000
+            # 得到本步开始的时间
             step["startTime"] = k
         # 记录总共花费的时间
         self.data["timeUsed"] = all_time_use
         # 计算开始实验的时间
         start_time = self.data["endTime"] - all_time_use * 1000
+        # 记录开始的时间
         self.data["startTime"] = start_time
+        self.data['uuid'] = self.uuid
+
         return json.dumps(self.data)
 
     def getExpEndTime(self):
@@ -94,9 +105,14 @@ class QiaSumbit():
     def submitData(self):
         # 提交数据的接口
         url = "https://virtualcourse.zhihuishu.com/report/saveReport"
-        self.data = {"jsonStr":self.data,"ticket":None}
+        self.data = {"jsonStr":self.data,"ticket":self.ticket}
         response = requests.post(url, data=self.data, headers=self.submitHeaders)
         logger.info("返回信息为:" + response.text)
+
+    def saveReport(self):
+        save_url = "https://service-fhc0s03y-1251776818.gz.apigw.tencentcs.com/release/qtxsn/" + self.uuid
+        resp = requests.get(url=save_url)
+        logger.info("返回信息为:" + resp.text)
 
     def run(self,score):
         logger.info("获取实验结束时间...")
@@ -114,7 +130,14 @@ class QiaSumbit():
 
 
 if __name__ == '__main__':
+    # 你的uuid,不需要设置,这个是智慧树那个平台的
+    uuid = ""
+    # 每个人的是不一样的
+    # %3D : =
+    # %2F : /
+    ticket = ""
     # 你期望的分数
     score = 100
-    qia = QiaSumbit()
+    qia = QiaSumbit(uuid,ticket)
+    # qia.saveReport()
     qia.run(score)

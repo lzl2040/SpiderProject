@@ -2,6 +2,10 @@
     "uuid":"",
     "experimentId":473,
     "courseId":2000077162,
+	"stepId":"",
+    "taskId":"",
+    "recordId":"",
+	"platformType":0,
     "startTime":1680006982972,
     "endTime":1680012956327,
     "timeUsed":5973,
@@ -304,7 +308,7 @@
                     "inputs":{
 
                     },
-                    "script":"5",
+                    "script":"7",
                     "datas":[
 
                     ]
@@ -344,7 +348,7 @@
                     "inputs":{
 
                     },
-                    "script":"7",
+                    "script":"9",
                     "datas":[
 
                     ]
@@ -384,7 +388,7 @@
                     "inputs":{
 
                     },
-                    "script":"8",
+                    "script":"10",
                     "datas":[
 
                     ]
@@ -404,7 +408,7 @@
                     "inputs":{
 
                     },
-                    "script":"2",
+                    "script":"3",
                     "datas":[
 
                     ]
@@ -424,7 +428,7 @@
                     "inputs":{
 
                     },
-                    "script":"11",
+                    "script":"13",
                     "datas":[
 
                     ]
@@ -464,7 +468,7 @@
                     "inputs":{
 
                     },
-                    "script":"1",
+                    "script":"6",
                     "datas":[
 
                     ]
@@ -484,7 +488,7 @@
                     "inputs":{
 
                     },
-                    "script":"8",
+                    "script":"10",
                     "datas":[
 
                     ]
@@ -504,7 +508,7 @@
                     "inputs":{
 
                     },
-                    "script":"3",
+                    "script":"4",
                     "datas":[
 
                     ]
@@ -524,7 +528,7 @@
                     "inputs":{
 
                     },
-                    "script":"2",
+                    "script":"3",
                     "datas":[
 
                     ]
@@ -544,7 +548,7 @@
                     "inputs":{
 
                     },
-                    "script":"11",
+                    "script":"13",
                     "datas":[
 
                     ]
@@ -564,7 +568,7 @@
                     "inputs":{
 
                     },
-                    "script":"2",
+                    "script":"3",
                     "datas":[
 
                     ]

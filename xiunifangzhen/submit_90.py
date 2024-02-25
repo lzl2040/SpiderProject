@@ -6,7 +6,7 @@ import time
 from urllib.parse import quote, unquote
 
 class QiaSumbit():
-    def __init__(self,uuid,ticket,file_path):
+    def __init__(self,uuid,ticket):
         self.tag = "QiaTongXue"
         # 提交数据的header
         self.submitHeaders = {
@@ -31,7 +31,7 @@ class QiaSumbit():
         }
         self.uuid = uuid
         self.ticket = ticket
-        self.file_path = file_path
+        self.file_path = 'static/96_data.json'
 
         self.other_headers = {
           "Accept": "*/*",
@@ -71,7 +71,15 @@ class QiaSumbit():
         # 总共花的步数
         step_len = len(self.data["steps"])
         # 遍历所有的步数,从结束时间往前推,计算开始时间和每步的时间
-        answer = [4,6,8,10,14,16]
+        ## 3一展厅二、三、四节学习：5    -2
+        ## 5二展厅学习：7  -2
+        ## 9四展厅学习：11 -2
+        ## 11五展厅一、二节学习：5  -1
+        ## 13五展厅三、四节学习：3  -1
+        ## 15六展厅学习：11    -2
+        time_span = [[181,300],[301,500],[301,500],[180,300],[181,300],[301,500]]
+        target_score = [5,7,11,5,3,11]
+        add = len(target_score) - 1
         for i in range(step_len):
             step = self.data["steps"][step_len - 1 - i]
             # 从一个实验到另外一个实验的时间
@@ -79,15 +87,23 @@ class QiaSumbit():
             all_time_use += t
             k = k - t * 1000
             step["endTime"] = k
-            #if int(step["seq"]) in answer:
-            #    t = step["timeUsed"] + random.randint(5, 10)
-            #else:
-            # 得到的是当前步骤花费的时间
-            t = step["expectTime"] + random.randint(10, 50)
-            # 记录使用的时间
-            step["timeUsed"] = t
-            # 记录当前步骤的分数
-            step["score"] = step["maxScore"]
+            if step['seq'] != 3 and step["seq"] != 5 and step["seq"] != 9 and step['seq'] != 11 and step['seq'] != 13 and step['seq'] != 15:
+                # 得到的是当前步骤花费的时间
+                t = step["expectTime"] + random.randint(10, 50)
+                # 记录使用的时间
+                step["timeUsed"] = t
+                # 记录当前步骤的分数
+                step["score"] = step["maxScore"]
+            else:
+                t = random.randint(time_span[add][0],time_span[add][1])
+                step["timeUsed"] = t
+                print(t)
+                step["score"] = target_score[add]
+                step['evaluation'] = '良'
+                # print(step['evaluation'])
+                # print(self.data['reportModels'][step_len - 1 - i]['reportContents'][0]['script'])
+                self.data['reportModels'][step_len - 1 - i]['reportContents'][0]['script'] = target_score[add]
+                add -= 1
             # 增加总共花费的时间
             all_time_use += t
             # 往前推时间
@@ -213,18 +229,17 @@ class QiaSumbit():
 
 if __name__ == '__main__':
     # 你的uuid,不需要设置,这个是智慧树那个平台的
-    uuid = "V8pge4Gl&6201"
+    uuid = "Xowq79om"
     # 每个人的是不一样的
     # %3D : =
     # %2F : /
-    # %2B : +10
-    read_file_path = 'static/100_data.json'
+    # %2B : +
     ticket = ""
-    # ticket = unquote(ticket)
-    # logger.info('ticket:' + ticket)
+    ticket = unquote(ticket)
+    logger.info('ticket:' + ticket)
     # 你期望的分数,这个要改
-    score = 100
-    qia = QiaSumbit(uuid,ticket,read_file_path)
+    score = 90
+    qia = QiaSumbit(uuid,ticket)
     qia.run(score)
     # qia.getExpEndTime()
     # qia.queryUserInfo()

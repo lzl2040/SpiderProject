@@ -102,6 +102,7 @@ class HotSearch():
             self.connection.commit()
         except:
             self.connection.rollback()
+
     def deleteFirst50(self):
         self.cursor = self.connection.cursor()
         # 删除前50条数据
